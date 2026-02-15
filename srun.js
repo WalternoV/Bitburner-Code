@@ -1,8 +1,6 @@
 /** @param {NS} ns */
 export async function main(ns) {
 
-  // const server = "n00dles"
-  // const script = "n00dles.js"
   const server = ns.args[0]
   const script = "hacktemp.js"
 
@@ -15,5 +13,5 @@ export async function main(ns) {
   const maxThread = Math.floor(freeRam / scriptRam) 
 
   ns.exec(script, server, maxThread)
-
+  
 }

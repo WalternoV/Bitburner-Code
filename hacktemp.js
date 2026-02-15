@@ -1,0 +1,22 @@
+/** @param {NS} ns */
+export async function main(ns) {
+
+  let server = ns.getHostname()
+  let mamon, cumon 
+  let misec, selvl
+
+  while(true) {
+    misec = ns.getServerMinSecurityLevel(server)
+    selvl = ns.getServerSecurityLevel(server)
+    cumon = ns.getServerMoneyAvailable(server)
+    mamon = ns.getServerMaxMoney(server)
+
+    if (misec < selvl) {
+      await ns.weaken(server)
+    } else if (cumon < mamon) {
+      await ns.grow(server)
+    } else {
+      await ns.hack(server)
+    }
+  }
+}

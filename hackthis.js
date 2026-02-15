@@ -2,7 +2,6 @@
 export async function main(ns) {
 
   const server = ns.args[0]
-  const serScript = server + ".js"
   const feedback = " is already getting hacked."
 
   const relvl = ns.getServerRequiredHackingLevel(server)
@@ -11,11 +10,11 @@ export async function main(ns) {
   
   if (relvl <= hacklvl && serport <= cport(ns)){
     if (!ns.hasRootAccess(server)){
-      ns.run("portkill.js", 1, server)
+      portKill(ns)
       await ns.asleep(400)
     }
     if (!ns.fileExists("hacktemp.js", server)){
-      scpfle(ns)
+      scpFile(ns)
       await ns.asleep(400)
     }
     if (!ns.isRunning("hacktemp.js", server)) {
@@ -39,9 +38,35 @@ export async function main(ns) {
     if (ns.fileExists("SQLInject.exe")) count++;
     return count;
   }
-  function scpfle(ns) {
+  
+  function scpFile(ns) {
     ns.scp("hacktemp.js", server, "home")
   }
-    
 
+  function portKill(ns) {
+    if (ns.fileExists("SQLInject.exe")){
+    ns.sqlinject(server)
+    ns.print("SQLInject.exe executed.")
+    }
+    if (ns.fileExists("HTTPWorm.exe")){
+      ns.httpworm(server)
+      ns.print("HTTPWorm.exe executed.")
+    }
+    if (ns.fileExists("relaySMTP.exe")){
+      ns.relaysmtp(server)
+      ns.print("relaySMTP.exe executed.")
+    }
+    if (ns.fileExists("FTPCrack.exe")){
+      ns.ftpcrack(server)
+      ns.print("FTPCrack.exe executed.")
+    }
+    if (ns.fileExists("BruteSSH.exe")){
+      ns.brutessh(server)
+      ns.print("BruteSSH.exe executed.")
+    } 
+    if (ns.fileExists("NUKE.exe")){
+      ns.nuke(server)
+      ns.print("NUKE.exe executed.")
+    }
+  }
 }

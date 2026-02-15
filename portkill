@@ -33,7 +33,4 @@ export async function main(ns) {
     ns.nuke(server)
     ns.print("NUKE.exe executed.")
   } 
-
-
-
 }

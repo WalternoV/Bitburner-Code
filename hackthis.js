@@ -7,6 +7,6 @@ export async function main(ns) {
   ns.run("pkil.js", 1, server)
   await ns.asleep(400)
   ns.run("scpfile.js", 1, server)
-
-  await ns.run("srun.js", 1, server)
+  await ns.asleep(400)
+  ns.run("srun.js", 1, server)
 }

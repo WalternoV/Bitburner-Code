@@ -3,6 +3,7 @@ export async function main(ns) {
 
   const server = ns.args[0]
   const serScript = server + ".js"
+  const feedback = " is already getting hacked."
 
   const relvl = ns.getServerRequiredHackingLevel(server)
   const hacklvl = ns.getHackingLevel()
@@ -14,13 +15,16 @@ export async function main(ns) {
       await ns.asleep(400)
     }
     if (!ns.fileExists("hacktemp.js", server)){
-      ns.run("scpfile.js", 1, server)
+      scpfle(ns)
       await ns.asleep(400)
     }
     if (!ns.isRunning("hacktemp.js", server)) {
       ns.run("srun.js", 1, server)
       await ns.asleep(400)
+    } else {
+      ns.alert(server + feedback)
     }
+    
   } else {
     ns.tprint("Error: Server Requirement not reached.")
   }
@@ -35,5 +39,9 @@ export async function main(ns) {
     if (ns.fileExists("SQLInject.exe")) count++;
     return count;
   }
+  function scpfle(ns) {
+    ns.scp("hacktemp.js", server, "home")
+  }
+    
 
 }

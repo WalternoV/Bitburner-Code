@@ -15,7 +15,7 @@ export async function main(ns) {
     await ns.asleep(400)
     ns.run("srun.js", 1, server)
   } else {
-    ns.tprint("Error: Server Required Hacking Level not reached.")
+    ns.tprint("Error: Server Requirement not reached.")
   }
   
   function cport(ns){

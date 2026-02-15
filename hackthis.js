@@ -9,11 +9,18 @@ export async function main(ns) {
   const serport = ns.getServerNumPortsRequired(server)
   
   if (relvl <= hacklvl && serport <= cport(ns)){
-    ns.run("portkill.js", 1, server)
-    await ns.asleep(400)
-    ns.run("scpfile.js", 1, server)
-    await ns.asleep(400)
-    ns.run("srun.js", 1, server)
+    if (!ns.hasRootAccess(server)){
+      ns.run("portkill.js", 1, server)
+      await ns.asleep(400)
+    }
+    if (!ns.fileExists("hacktemp.js", server)){
+      ns.run("scpfile.js", 1, server)
+      await ns.asleep(400)
+    }
+    if (!ns.isRunning("hacktemp.js", server)) {
+      ns.run("srun.js", 1, server)
+      await ns.asleep(400)
+    }
   } else {
     ns.tprint("Error: Server Requirement not reached.")
   }

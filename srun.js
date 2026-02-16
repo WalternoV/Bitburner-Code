@@ -11,7 +11,9 @@ export async function main(ns) {
   const scriptRam = ns.getScriptRam(script, "home")
 
   const maxThread = Math.floor(freeRam / scriptRam) 
-
-  ns.exec(script, server, maxThread)
-  
+  if(maxThread != 0) {
+    ns.exec(script, server, maxThread)
+  } else {
+    ns.alert("Error: No ram server")
+  }
 }

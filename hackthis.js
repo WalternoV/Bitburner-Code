@@ -29,7 +29,7 @@ export async function main(ns) {
   }
   
   function cport(ns){
-    let count = 0
+    let count = -1
     if (ns.fileExists("NUKE.exe")) count++;
     if (ns.fileExists("BruteSSH.exe")) count++;
     if (ns.fileExists("FTPCrack.exe")) count++;

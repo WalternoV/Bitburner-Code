@@ -5,6 +5,8 @@ export async function main(ns) {
   let mamon, cumon 
   let misec, selvl
 
+  ns.tprint("Hacking Attempt ("+  server +"): Success")
+
   while(true) {
     misec = ns.getServerMinSecurityLevel(server)
     selvl = ns.getServerSecurityLevel(server)

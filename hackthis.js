@@ -1,6 +1,6 @@
 /** @param {NS} ns */
 export async function main(ns) {
-  
+
   const server = ns.args[0]
   //const server = "n00dles"
   const feedback = " is already getting hacked."
@@ -18,30 +18,32 @@ export async function main(ns) {
       await ns.asleep(400)
     }
 
-    if (!ns.fileExists("hacktemp.js", server )){
-      if (getMaxRam(ns) != 0) {
-        scpFile(server)
+    
+    if (getMaxRam(ns) != 0) {
+      scpFile(server)
+      await ns.asleep(400)
+    } else {
+      subSer = "sub" + server
+      subExi = ns.serverExists(subSer)
+      if (subExi == false){
+        useSub(subSer)
         await ns.asleep(400)
-      } else {
-        subSer = "sub_" + server
-        subExi = ns.serverExists(subSer)
-        if (subExi == false){
-          useSub(subSer)
-          await ns.asleep(400)
-        }
-        if (!ns.fileExists("hacktemp.js", subSer)) {
-          finSer = subSer
-          scpFile(finSer)
-          isSub = true
-          await ns.asleep(400)
-        }
+        subExi = true
+      }
+      if (!ns.fileExists("hacktemp.js", subSer)) {
+        finSer = subSer
+        scpFile(finSer)
+        isSub = true
+        await ns.asleep(400)
       }
     }
+    
 
     if (!ns.isRunning("hacktemp.js", server) && isSub == false) {
       ns.run("srun.js", 1, server)
       await ns.asleep(400)
     } else if (!ns.isRunning("hacktemp.js", server) && isSub == true) {
+      
       ns.run("srun.js", 1, finSer)
       await ns.asleep(400)
     } else {
@@ -63,8 +65,8 @@ export async function main(ns) {
     return count;
   }
   
-  function scpFile(server) {
-    ns.scp("hacktemp.js", server, "home")
+  function scpFile(scpSer) {
+    ns.scp("hacktemp.js", scpSer, "home")
   }
 
   function portKill(ns) {
@@ -102,9 +104,9 @@ export async function main(ns) {
   function useSub(server) {
     var curMon = ns.getServerMoneyAvailable("home")
     var serCos = ns.getPurchasedServerCost(1024)
-    var subSer = "sub_" + server
+    var madeSub = "sub_" + server
     if (serCos <= curMon) {
-      ns.purchaseServer(subSer, 1024) 
+      ns.purchaseServer(madeSub, 1020) 
     } else {
       ns.alert("Error: Not enough money to purchase new Sub Server")
     }

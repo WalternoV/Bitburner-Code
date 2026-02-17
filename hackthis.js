@@ -1,6 +1,6 @@
 /** @param {NS} ns */
 export async function main(ns) {
-
+  
   const server = ns.args[0]
   //const server = "n00dles"
   const feedback = " is already getting hacked."
@@ -19,11 +19,11 @@ export async function main(ns) {
     }
 
     if (!ns.fileExists("hacktemp.js", server )){
-      if (getMaxRam != 0) {
+      if (getMaxRam(ns) != 0) {
         scpFile(server)
         await ns.asleep(400)
       } else {
-        subSer = "sub" + server
+        subSer = "sub_" + server
         subExi = ns.serverExists(subSer)
         if (subExi == false){
           useSub(subSer)
@@ -42,7 +42,7 @@ export async function main(ns) {
       ns.run("srun.js", 1, server)
       await ns.asleep(400)
     } else if (!ns.isRunning("hacktemp.js", server) && isSub == true) {
-      ns.run("srun.js", 1, finSub)
+      ns.run("srun.js", 1, finSer)
       await ns.asleep(400)
     } else {
       ns.alert(server + feedback)
@@ -104,7 +104,7 @@ export async function main(ns) {
     var serCos = ns.getPurchasedServerCost(1024)
     var subSer = "sub_" + server
     if (serCos <= curMon) {
-      ns.purchaseServer(subSer, 1020) 
+      ns.purchaseServer(subSer, 1024) 
     } else {
       ns.alert("Error: Not enough money to purchase new Sub Server")
     }

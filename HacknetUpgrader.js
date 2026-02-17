@@ -9,7 +9,7 @@ export async function main(ns) {
 
     if (nodeCos <= curMon) {
       ns.hacknet.purchaseNode()
-      ns.print("Puchased Node")
+      ns.print("Purchased Node")
     }
 
     for(let n = 0; n < nodeNum; n++) {

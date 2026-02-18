@@ -3,14 +3,7 @@ export async function main(ns) {
   var nodeCos, coreCos, ramCos, lvlCos, curMon, nodeNum
   
   while (true) {
-    curMon = ns.getServerMoneyAvailable("home")
-    nodeCos = ns.hacknet.getPurchaseNodeCost()
     nodeNum = ns.hacknet.numNodes()
-
-    if (nodeCos <= curMon) {
-      ns.hacknet.purchaseNode()
-      ns.print("Purchased Node")
-    }
 
     for(let n = 0; n < nodeNum; n++) {
 
@@ -18,6 +11,11 @@ export async function main(ns) {
       coreCos = ns.hacknet.getCoreUpgradeCost(n)
       ramCos = ns.hacknet.getRamUpgradeCost(n)
       lvlCos = ns.hacknet.getLevelUpgradeCost(n)
+
+      if (nodeCos <= curMon) {
+      ns.hacknet.purchaseNode()
+      ns.print("Purchased Node")
+      }
 
       if (coreCos <= curMon) {
         ns.hacknet.upgradeCore(n)

@@ -18,7 +18,6 @@ export async function main(ns) {
       await ns.asleep(400)
     }
 
-    
     if (getMaxRam(ns) != 0) {
       scpFile(server)
       await ns.asleep(400)
@@ -104,9 +103,9 @@ export async function main(ns) {
   function useSub(server) {
     var curMon = ns.getServerMoneyAvailable("home")
     var serCos = ns.getPurchasedServerCost(1024)
-    var madeSub = "sub_" + server
+    //var madeSub = "sub_" + server
     if (serCos <= curMon) {
-      ns.purchaseServer(madeSub, 1020) 
+      ns.purchaseServer(server, 1024) 
     } else {
       ns.alert("Error: Not enough money to purchase new Sub Server")
     }

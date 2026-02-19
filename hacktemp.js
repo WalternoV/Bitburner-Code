@@ -5,6 +5,10 @@ export async function main(ns) {
   let mamon, cumon 
   let misec, selvl
 
+  if(server.startsWith("sub", 0,1,2)) {
+    server = server.slice(3)
+  }
+
   ns.tprint("Hacking Attempt ("+  server +"): Success")
 
   while(true) {
@@ -12,6 +16,8 @@ export async function main(ns) {
     selvl = ns.getServerSecurityLevel(server)
     cumon = ns.getServerMoneyAvailable(server)
     mamon = ns.getServerMaxMoney(server)
+
+    
 
     if (misec < selvl) {
       await ns.weaken(server)

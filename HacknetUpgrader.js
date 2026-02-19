@@ -4,6 +4,7 @@ export async function main(ns) {
   
   while (true) {
     nodeNum = ns.hacknet.numNodes()
+    nodeCos = ns.hacknet.getPurchaseNodeCost()
 
     for(let n = 0; n < nodeNum; n++) {
 

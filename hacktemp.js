@@ -1,7 +1,14 @@
 /** @param {NS} ns */
 export async function main(ns) {
 
-  let server = ns.getHostname()
+  let server
+
+  if (ns.args[0] == null) {
+    server = ns.getHostname()
+  } else {
+    server = ns.args[0]
+  }
+
   let mamon, cumon 
   let misec, selvl
   

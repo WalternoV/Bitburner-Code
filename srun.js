@@ -1,7 +1,18 @@
 /** @param {NS} ns */
 export async function main(ns) {
 
-  const server = ns.args[0]
+  let server, target
+  // = ns.args[0]
+
+
+  if (ns.args[0] != null) {
+    server = ns.args[0]
+    target = ns.args[1]
+    
+  } else {
+    server = ns.getHostname()
+  }
+
   const script = "hacktemp.js"
 
   const maxRam = ns.getServerMaxRam(server)
@@ -11,9 +22,5 @@ export async function main(ns) {
   const scriptRam = ns.getScriptRam(script, "home")
 
   const maxThread = Math.floor(freeRam / scriptRam) 
-  if(maxThread != 0) {
-    ns.exec(script, server, maxThread)
-  } else {
-    ns.alert("Error: No ram server")
-  }
+  ns.exec(script, server, maxThread, target)
 }

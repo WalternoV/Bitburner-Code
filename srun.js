@@ -1,16 +1,16 @@
 /** @param {NS} ns */
 export async function main(ns) {
 
-  let server, target
+  var server, target, isNorm = true
   // = ns.args[0]
 
 
-  if (ns.args[0] != null) {
+  if (ns.args[1] == null) {
+    server = ns.args[0]
+  } else {
     server = ns.args[0]
     target = ns.args[1]
-    
-  } else {
-    server = ns.getHostname()
+    isNorm = false
   }
 
   const script = "hacktemp.js"
@@ -22,5 +22,10 @@ export async function main(ns) {
   const scriptRam = ns.getScriptRam(script, "home")
 
   const maxThread = Math.floor(freeRam / scriptRam) 
-  ns.exec(script, server, maxThread, target)
+
+  if (isNorm == false) {
+    ns.exec(script, server, maxThread, target)
+  } else {
+    ns.exec(script, server, maxThread)
+  }
 }

@@ -26,6 +26,6 @@ export async function main(ns) {
         ns.hacknet.upgradeLevel(n)
       }
     }
-    await ns.asleep(1000)
+    await ns.asleep(10)
   }
 }
